@@ -1,0 +1,130 @@
+body {
+  background-color:grey;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  height:100vh;
+  margin:0; padding:0;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+
+.head {
+  position:fixed;
+  top:0; right:0; left:0;
+  background-color:rgb(66,66,66);
+  height:15vh;
+  display:flex;
+  align-items:center;
+  flex-direction:line;
+  border-width:0 0 .3vw 0;
+  border-color:black;
+  border-style:solid;
+}
+
+.back-but,.clear-all {
+  border:.3vw solid black;
+  border-radius:2vw;
+  color:white;
+  background-color:grey;
+  width:20vw; height:10vh;
+  font-size:3cqw;
+  margin-left:1vw;
+}
+
+.back-but:hover {
+  opacity:.9;
+  cursor:pointer;
+}
+
+.clear-all:hover {
+  background-color:red;
+  cursor:pointer;
+}
+
+.restscreen {
+  height:80%;
+  width:100%;
+  margin-top:11.4vh;
+}
+
+.azi,.maine,.candva {
+  height:14cqw;
+  width:100%;
+  background-color:grey;
+  border-width:0;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+}
+
+.delitem {
+  width:13cqw; height:8cqw;
+  font-size:2cqw;
+  background-color:rgb(86,86,86);
+  border:.3vw solid black;
+  border-radius:2vw;
+  margin:1vh 0 0 2vw;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  position:relative;
+}
+
+.delete,.inapoi {
+  position:absolute;
+  top:.7vh; right:.7vw;
+  width:2vw; height:2vw;
+  border:none;
+  border-radius:2vw;
+  background-color:rgb(86,86,86);
+  font-size:1.5cqw;
+}
+
+.delete:hover {
+  cursor:pointer;
+  background-color:red;
+}
+
+.linie {
+  background-color:black;
+  margin:0; padding:0;
+  position:fixed;
+  left:0; right:0;
+  height:.3vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.mazca,.sigma {
+  background-color:rgb(235,235,235);
+  height:8vh; width:15vw;
+  border:.2vw solid black;
+  border-radius:2vw;
+  font-size:3.5cqw;
+  text-align:center;
+}
+
+.sigma {
+  margin-top:21.5vh;
+  margin-left:.7vw;
+}
+
+.inapoi {
+  left:7%;
+  top:3%;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.inapoi:hover {
+  cursor:pointer;
+  background-color:rgb(17,0,254);
+}
