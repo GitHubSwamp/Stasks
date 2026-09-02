@@ -32,6 +32,7 @@ for (const taskData of aziTask) {
       JSON.parse(localStorage.getItem("deletedTasks")) || [];
 
     deletedTasks.push(taskData);
+
     localStorage.setItem(
       "deletedTasks",
       JSON.stringify(deletedTasks)
@@ -45,6 +46,7 @@ for (const taskData of aziTask) {
 
     if (index !== -1) {
       tasks.splice(index, 1);
+
       localStorage.setItem(
         "tasks",
         JSON.stringify(tasks)
@@ -59,16 +61,23 @@ clearAll.addEventListener("click", () => {
   const deletedTasks =
     JSON.parse(localStorage.getItem("deletedTasks")) || [];
 
-  const todayTasks = tasks.filter(task => task[1] === todayi);
+  for (const taskData of aziTask) {
+    const index = tasks.findIndex(task =>
+      task[0] === taskData[0] &&
+      task[1] === taskData[1] &&
+      task[2] === taskData[2]
+    );
 
-  deletedTasks.push(...todayTasks);
+    if (index !== -1) {
+      deletedTasks.push(tasks[index]);
+      tasks.splice(index, 1);
+    }
+  }
 
   localStorage.setItem(
     "deletedTasks",
     JSON.stringify(deletedTasks)
   );
-
-  tasks = tasks.filter(task => task[1] !== todayi);
 
   localStorage.setItem(
     "tasks",
