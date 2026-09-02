@@ -1,31 +1,46 @@
 const today = new Date();
+
 const todayi = today.getFullYear() + "-" +
   String(today.getMonth() + 1).padStart(2, "0") + "-" +
   String(today.getDate()).padStart(2, "0");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
 const aziTask = tasks.filter(task => task[1] === todayi);
+
 const clearAll = document.querySelector(".clear-all");
 
 for (const taskData of aziTask) {
   let ora = Number(taskData[2].split(":")[0]);
-  if (ora === 0) ora = 24;
+
+  if (ora === 0) {
+    ora = 24;
+  }
 
   const undea = document.getElementById(String(ora));
+
   const box = document.createElement("div");
   box.classList.add("delitem");
   box.textContent = taskData[0];
+
   undea.appendChild(box);
 
   const dele = document.createElement("button");
   dele.classList.add("delete");
   dele.textContent = "X";
+
   box.appendChild(dele);
 
   dele.addEventListener("click", () => {
-    const deletedTasks = JSON.parse(localStorage.getItem("deletedTasks")) || [];
+    let deletedTasks =
+      JSON.parse(localStorage.getItem("deletedTasks")) || [];
+
     deletedTasks.push(taskData);
-    localStorage.setItem("deletedTasks", JSON.stringify(deletedTasks));
+
+    localStorage.setItem(
+      "deletedTasks",
+      JSON.stringify(deletedTasks)
+    );
 
     const index = tasks.findIndex(task =>
       task[0] === taskData[0] &&
@@ -35,7 +50,11 @@ for (const taskData of aziTask) {
 
     if (index !== -1) {
       tasks.splice(index, 1);
-      localStorage.setItem("tasks", JSON.stringify(tasks));
+
+      localStorage.setItem(
+        "tasks",
+        JSON.stringify(tasks)
+      );
     }
 
     box.remove();
@@ -43,6 +62,24 @@ for (const taskData of aziTask) {
 }
 
 clearAll.addEventListener("click", () => {
-  localStorage.removeItem("tasks");
+  let deletedTasks =
+    JSON.parse(localStorage.getItem("deletedTasks")) || [];
+
+  const todayTasks = tasks.filter(task => task[1] === todayi);
+
+  deletedTasks.push(...todayTasks);
+
+  localStorage.setItem(
+    "deletedTasks",
+    JSON.stringify(deletedTasks)
+  );
+
+  tasks = tasks.filter(task => task[1] !== todayi);
+
+  localStorage.setItem(
+    "tasks",
+    JSON.stringify(tasks)
+  );
+
   location.reload();
 });
