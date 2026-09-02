@@ -9,34 +9,23 @@ const clearAll = document.querySelector(".clear-all");
 
 for (const taskData of aziTask) {
   let ora = Number(taskData[2].split(":")[0]);
-
-  if (ora === 0) {
-    ora = 24;
-  }
+  if (ora === 0) ora = 24;
 
   const undea = document.getElementById(String(ora));
   const box = document.createElement("div");
-
   box.classList.add("delitem");
   box.textContent = taskData[0];
   undea.appendChild(box);
 
   const dele = document.createElement("button");
-
   dele.classList.add("delete");
   dele.textContent = "X";
   box.appendChild(dele);
 
   dele.addEventListener("click", () => {
-    const deletedTasks =
-      JSON.parse(localStorage.getItem("deletedTasks")) || [];
-
+    const deletedTasks = JSON.parse(localStorage.getItem("deletedTasks")) || [];
     deletedTasks.push(taskData);
-
-    localStorage.setItem(
-      "deletedTasks",
-      JSON.stringify(deletedTasks)
-    );
+    localStorage.setItem("deletedTasks", JSON.stringify(deletedTasks));
 
     const index = tasks.findIndex(task =>
       task[0] === taskData[0] &&
@@ -46,11 +35,7 @@ for (const taskData of aziTask) {
 
     if (index !== -1) {
       tasks.splice(index, 1);
-
-      localStorage.setItem(
-        "tasks",
-        JSON.stringify(tasks)
-      );
+      localStorage.setItem("tasks", JSON.stringify(tasks));
     }
 
     box.remove();
@@ -58,31 +43,6 @@ for (const taskData of aziTask) {
 }
 
 clearAll.addEventListener("click", () => {
-  const deletedTasks =
-    JSON.parse(localStorage.getItem("deletedTasks")) || [];
-
-  for (const taskData of aziTask) {
-    const index = tasks.findIndex(task =>
-      task[0] === taskData[0] &&
-      task[1] === taskData[1] &&
-      task[2] === taskData[2]
-    );
-
-    if (index !== -1) {
-      deletedTasks.push(tasks[index]);
-      tasks.splice(index, 1);
-    }
-  }
-
-  localStorage.setItem(
-    "deletedTasks",
-    JSON.stringify(deletedTasks)
-  );
-
-  localStorage.setItem(
-    "tasks",
-    JSON.stringify(tasks)
-  );
-
+  localStorage.removeItem("tasks");
   location.reload();
 });
